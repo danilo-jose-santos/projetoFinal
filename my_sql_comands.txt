@@ -1,0 +1,158 @@
+show databases;
+create database aula;
+use aula;
+create table alunos(ra varchar(5),nome varchar(20),endereco varchar(30));
+show tables;
+describe alunos;
+alter table alunos rename to aluno;
+alter table aluno add telefone varchar(20) after endereco;
+alter table aluno drop telefone;
+drop table aluno;
+create table aluno(ra varchar(5),nome varchar(20),endereco varchar(30));
+
+create table Meus_Contatos(nome char(30),sobrenome char(20),email varchar(50),aniversario date, provissao varchar(20),estadocivil varchar(20),endereco varchar(100),whats varchar(20));
+alter table aluno add estadocivil varchar(20) after nome;
+
+
+
+//insert
+insert into aluno (ra,nome,endereco) values ('001','José','Rua da consolação 1');
+insert into aluno (ra,nome,endereco) values ('002','João','Rua da graça 1');
+insert into aluno (ra,nome,endereco) values ('003','Maria','Rua xtpo 1');
+select * from aluno;
+insert into aluno values ('004','Pedro','Rua xtpo 2');
+
+//deletar registro
+delete from aluno WHERE ra='004';
+
+//criar novo schema (novo schema ou database)
+CREATE SCHEMA `new_schema` ;
+
+
+SELECT ra,nome,endereco FROM aluno WHERE idaluno=3;
+delete from aluno WHERE idaluno =123;
+SELECT nome FROM aluno WHERE valor_mensalidade>500;
+SELECT nome FROM aluno ORDER BY nome asc;
+SELECT nome FROM aluno ORDER BY nome desc;
+SELECT nome,endereco FROM aluno ORDER BY valor_mensalidade desc;
+update aluno set valor_mensalidade = 432 where idaluno=1;
+
+### brmodelo - para fazer o diagrama
+### profcrisfidelix@hotmail.com
+
+use aula4;
+show tables;
+describe cliente;
+describe contato;
+
+insert into cliente values(id_cliente,'Maria',01/01/1990);
+select * from cliente;
+
+insert into contato values(id_contato,'5555-1111','eqwe@nmtgf.com',4);
+select * from contato;
+
+use aula5;
+describe cliente;
+
+insert into cliente values(id_client,'José','Rua do José, 1','Cidade do José','1111-1111');
+insert into cliente values(id_client,'João','Rua do João, 1','Cidade do Maria','2222-2222');
+insert into cliente values(id_client,'Maria','Rua da Maria, 1','Cidade da Maria','3333-3333');
+insert into cliente values(id_client,'José','Rua do Chico, 1','Cidade do Chico','4444-4444');
+
+select * from cliente;
+
+describe pedido;
+insert into pedido values(id_pedido,1,100,'25/05/2020',5);
+
+
+select * from pedido;
+insert into pedido values(id_pedido,1,200,'20/06/2020',5);
+insert into pedido values(id_pedido,2,300,'17/04/2020',5);
+insert into pedido values(id_pedido,3,400,'25/03/2020',5);
+insert into pedido values(id_pedido,3,500,'12/06/2020',5);
+insert into pedido values(id_pedido,4,100,'01/06/2020',5);
+insert into pedido values(id_pedido,4,400,'25/06/2020',5);
+
+select pedido.*,cliente.* from pedido,cliente where pedido.id_cliente=cliente.id_client;
+select * from cliente;
+
+delete from cliente WHERE id_client =5;
+describe cliente;
+use aula5;
+
+select cliente.nome,pedido.id_pedido from cliente,pedido where cliente.id_client=pedido.id_cliente;
+select p.id_pedido,c.Nome,p.valor,p.prazo_entrega from cliente c inner join pedido p on p.id_Cliente2=c.id_Cliente;
+select pedido.*,cliente.* from pedido,cliente where pedido.idcliente=cliente.idcliente;
+
+select cliente.*,pedido.* from cliente,pedido where cliente.idcliente=pedido.idcliente;
+
+select cliente.nome,pedido.idpedido,pedido.valor from cliente,pedido where cliente.idcliente=pedido.idcliente;
+
+select p.*,c.* from pedido p, cliente c where p.idcliente = c.idcliente;
+
+select p.idpedido,c.nome,p.valor,p.prazoentrega from cliente c inner join pedido p on p.idcliente=c.idcliente;
+
+###########################
+https://pt.slideshare.net/CrisFidelix/cases-3-java-prof-cristiane-fidelix
+https://downloads.certiport.com/Marketing/MTA/Localizations/PTB/MTA_SSG_DbAdmin_individual_PTB.pdf
+###########################
+
+=====
+
+servidor web tradicional
+http://fsdafsd.com/index.htm - servidor web
+http://fsdafsd.com/hello - servidor web java - hello é nome da classe (tomcat)
+
+web moderno (descoplado)
+
+browser -> redis -> apache (frontend / html, css, js)  <-json->  backend java springboot (rest) -> database
+
+###########################
+https://www.youtube.com/watch?v=nbZ20SjOX9s&list=PLjcmNukBom6_uUcE6fdKXjOPh9XkSjA6D
+http://t.me/TemAula
+http://www.professorisidro.com.br/biblioteca-x-api-x-framework/
+###########################
+tomcat concorrentes: jboss, websphere, wildfly
+
+spring - é o framework web
+maven - gerencia as dependências
+
+start.spring.io
+gera um zip e baixa do projeto, com o pom.xml pra baixar as dependências (spring boot devtools e spring web)
+descompactar a pasta
+no eclipse abre a pasta descompactada no workspace
+file import maven, existing maven projects, aponta a pasta do pom.xml
+
+
+------
+ORM - object-relationship mapping - converte atributos de um objeto para colunas em uma tabela de banco.
+JPA - java persistence API - especificação conhecida como Hibernate. Pode criar as tabelas
+
+----
+Spring Data JPA
+MySQL Driver 
+----
+em resources, application properties - configuração de conexão com o banco de dados:
+
+# Parametros obrigatórios
+# 1 - usuario do banco
+spring.datasource.username = root
+# 2 - senha do banco
+spring.datasource.password = qAzwsx123*
+# 3 - string de conexao com a base criada
+spring.datasource.url = jdbc:mysql://localhost:3306/projeto?useTimezon=true&serverTimezone=UTC
+# 4 - dialeto
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
+
+# parametros opcionais
+# 5 logs
+spring.jpa.show_sql = true
+# delega ao JPA a eventual criação de tabelas (só recomendado usar em lab pq não tem análise dos dba)
+spring.jpa.hibernate.dll-auto = update
+
+---
+ref https://spring.io/projects/spring-data-jdbc
+---
+
+
+https://github.com/professorisidro/projetoDashboard/blob/master/src/main/java/br/com/isidrocorp/projeto/controller/DepartamentoController.java
