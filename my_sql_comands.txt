@@ -156,3 +156,12 @@ ref https://spring.io/projects/spring-data-jdbc
 
 
 https://github.com/professorisidro/projetoDashboard/blob/master/src/main/java/br/com/isidrocorp/projeto/controller/DepartamentoController.java
+
+http://www.professorisidro.com.br/manual-de-sobrevivencia-do-github/
+http://www.professorisidro.com.br/wp-content/uploads/bd/
+http://www.professorisidro.com.br/wp-content/uploads/Git_2Maquinas.pdf
+http://www.professorisidro.com.br/wp-content/uploads/Resumao_GIT.pdf
+
+http://localhost:8080/usuario
+https://wordpad.cc/professorisidro
+https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status
